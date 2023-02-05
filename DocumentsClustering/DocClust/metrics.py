@@ -7,7 +7,7 @@ External evaluation, clustering is compared to an existing "ground truth" classi
 def rand_index(labels_true, labels_pred):
 	# Rand Index [0, 1] 
 	return metrics.rand_score(labels_true, labels_pred)
-
+		
 
 def adjusted_rand_index(labels_true, labels_pred):
 	# Adjusted Rand Index [-1, 1] 
@@ -46,3 +46,11 @@ def adjusted_mutual_information(labels_true, labels_pred):
 
 def adjusted_normalized_mutual_information(labels_true, labels_pred):
 	return metrics.normalized_mutual_info_score(labels_true, labels_pred)
+
+
+def pairwise_distances(cl_a, cl_b, metric):
+    return metrics.pairwise_distances(
+		cl_a, 
+		cl_b, 
+		metric = metric,
+	)

@@ -18,7 +18,7 @@ def spacy_model(corpus, lang):
     if (lang == "en"):
         nlp = spacy.load('en_core_web_lg')
     else:
-        nlpGr = spacy.load('el_core_news_lg')
+        nlp = spacy.load('el_core_news_lg')
 
     doc_vectors = []
     for text in corpus:
