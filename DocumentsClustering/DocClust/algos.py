@@ -80,14 +80,10 @@ def optics(X, max_eps, metric):
 
 def common_nn(X, dist_nbr_threshold, metric):
 	return CommonNNClustering(
-			eps = dist_nbr_threshold, 
-			min_samples = 5, 
-			metric = metric, 
-			algorithm = 'auto',
-			leaf_size = 30, 
-			p = 1 
+		eps = dist_nbr_threshold, 
+		min_samples = 5, 
+		metric = metric, 
+		algorithm = 'auto',
+		leaf_size = 30, 
+		p = 1 
 	).fit(X)
-
-
-
-

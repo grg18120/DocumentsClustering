@@ -44,13 +44,9 @@ def adjusted_mutual_information(labels_true, labels_pred):
 	return metrics.adjusted_mutual_info_score(labels_true, labels_pred)
 
 
-def adjusted_normalized_mutual_information(labels_true, labels_pred):
+def normalized_mutual_information(labels_true, labels_pred):
 	return metrics.normalized_mutual_info_score(labels_true, labels_pred)
 
 
 def pairwise_distances(cl_a, cl_b, metric):
-    return metrics.pairwise_distances(
-		cl_a, 
-		cl_b, 
-		metric = metric,
-	)
+    return metrics.pairwise_distances(cl_a, cl_b, metric = metric)
