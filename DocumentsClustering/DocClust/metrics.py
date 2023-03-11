@@ -24,6 +24,7 @@ def fowlkes_mallows_index(labels_true, labels_pred):
 	"""
 	return metrics.fowlkes_mallows_score(labels_true, labels_pred)
 
+
 def v_measure_index(labels_true, labels_pred):
 	"""
 	Homogeneity(h), completeness(c) and V-measure metric
@@ -49,4 +50,4 @@ def normalized_mutual_information(labels_true, labels_pred):
 
 
 def pairwise_distances(cl_a, cl_b, metric):
-    return metrics.pairwise_distances(cl_a, cl_b, metric = metric)
+	return metrics.pairwise_distances(cl_a, cl_b, metric = metric)

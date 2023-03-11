@@ -1,6 +1,16 @@
 import spacy
+from sentence_transformers import SentenceTransformer
 from sklearn.feature_extraction.text import TfidfVectorizer
 from numpy import average
+
+def load_models():
+    spacy_model_en = spacy.load('en_core_web_lg')
+    spacy_model_gr = spacy.load('el_core_news_lg')
+    sent_transorfmers_model = SentenceTransformer(
+        model_name_or_path = 'sentence-transformers/all-mpnet-base-v2',
+        device = 'cpu'
+    )
+    return [spacy_model_en, spacy_model_gr, sent_transorfmers_model]
 
 
 def useful_token(token):
@@ -13,20 +23,23 @@ def useful_token(token):
     return token.pos_ in ['NOUN','PROPN','ADJ'] and token.is_alpha and not token.is_stop and token.has_vector 
 
 
-def spacy_model(corpus, lang):
-    # Choose proper model according to dataset
-    if (lang == "en"):
-        nlp = spacy.load('en_core_web_lg')
-    else:
-        nlp = spacy.load('el_core_news_lg')
-
+def spacy_model_embeddings(corpus, spacy_model):
     doc_vectors = []
-    for text in corpus:
-        doc = nlp(text)
+    for text_document in corpus:
+        doc = spacy_model(text_document)
         vector_list = [token.vector for token in doc if useful_token(token)]
         doc_vector = average(vector_list,axis=0)
         doc_vectors.append(doc_vector)
 
+    return doc_vectors
+
+def sent_transformers_model_embeddings(corpus, sent_transorfmers_model):
+    doc_vectors = []
+    for text_document in corpus:
+        # To modelo tou sent_transorfmers exei periorismo sto length tou text document
+        # sent_transorfmers_model.max_seq_length
+        # exw grapsei erwthsh gia ton Niko
+        doc_vectors.append(sent_transorfmers_model.encode(text_document))
     return doc_vectors
 
 
